@@ -1,30 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-    
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek'
-        },
         selectable: true,
-        // දවසක් උඩ ක්ලික් කළාම වෙන දේ
         select: function(info) {
-            let price = prompt('Enter Room Rate for ' + info.startStr + ':');
-            if (price) {
-                // මෙතන තමයි ඔයාගේ API එකට data යවන්නේ
-                console.log("Saving to Backend:", { date: info.startStr, price: price });
-                
-                // Calendar එකට දාන්න (UI එකේ පේන්න)
-                calendar.addEvent({
-                    title: 'LKR ' + price,
-                    start: info.startStr,
-                    allDay: true
-                });
+            let rate = prompt('Enter Rate for ' + info.startStr);
+            if (rate) {
+                // Rate Save/Update API logic here
+                alert("Rate " + rate + " saved for " + info.startStr);
+                calendar.addEvent({ title: 'LKR ' + rate, start: info.startStr, allDay: true });
+            }
+        },
+        eventClick: function(info) {
+            if(confirm("Block this date?")) {
+                info.event.remove(); // UI එකෙන් දවස අයින් කරනවා (Block කරනවා)
             }
         }
     });
-    
     calendar.render();
 });
+
+function addRoom() {
+    let name = document.getElementById('roomName').value;
+    alert("Room " + name + " added successfully!");
+}
