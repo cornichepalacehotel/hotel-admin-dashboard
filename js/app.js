@@ -1,26 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        selectable: true,
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth'
+        },
+        selectable: true, // දින තෝරන්න පුළුවන්
         select: function(info) {
-            let rate = prompt('Enter Rate for ' + info.startStr);
+            let rate = prompt('Enter Rate for ' + info.startStr + ':');
             if (rate) {
-                // Rate Save/Update API logic here
-                alert("Rate " + rate + " saved for " + info.startStr);
-                calendar.addEvent({ title: 'LKR ' + rate, start: info.startStr, allDay: true });
+                // Rate එක Calendar එකේ පෙන්වීම
+                calendar.addEvent({
+                    title: 'LKR ' + rate,
+                    start: info.startStr,
+                    allDay: true
+                });
+                alert("Rate LKR " + rate + " saved for " + info.startStr);
             }
         },
         eventClick: function(info) {
-            if(confirm("Block this date?")) {
-                info.event.remove(); // UI එකෙන් දවස අයින් කරනවා (Block කරනවා)
+            if(confirm("Do you want to delete/block this date?")) {
+                info.event.remove();
             }
         }
     });
+    
     calendar.render();
 });
 
 function addRoom() {
     let name = document.getElementById('roomName').value;
-    alert("Room " + name + " added successfully!");
+    if(name) {
+        alert("Room '" + name + "' added!");
+        document.getElementById('roomName').value = ""; // Clear input
+    } else {
+        alert("Please enter a room name.");
+    }
 }
