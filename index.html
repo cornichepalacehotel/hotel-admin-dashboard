@@ -13,13 +13,18 @@
     <div class="max-w-5xl mx-auto">
         <h1 class="text-3xl font-bold mb-6 text-center text-blue-800">Hotel Rate Manager</h1>
         
-        <div class="bg-white p-6 rounded shadow mb-6">
-            <h2 class="font-bold text-lg mb-2">Add/Edit Room Type</h2>
-            <div class="flex gap-2">
-                <input type="text" id="roomName" placeholder="Room Name (e.g. Deluxe Suite)" class="border p-2 flex-grow rounded">
-                <button onclick="addRoom()" class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700">Add Room</button>
-            </div>
-        </div>
+        <!-- Room Input -->
+<div class="bg-white p-6 rounded shadow mb-6">
+    <h2 class="font-bold text-lg mb-2">Select Room Category</h2>
+    <div class="flex gap-2">
+        <select id="roomCategory" class="border p-2 rounded">
+            <option value="Deluxe">Deluxe Room</option>
+            <option value="Standard">Standard Room</option>
+            <option value="Suite">Suite Room</option>
+        </select>
+        <button onclick="addRoom()" class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700">Set Category</button>
+    </div>
+</div>
         
         <div id="calendar" class="bg-white p-6 rounded shadow"></div>
     </div>
